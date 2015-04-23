@@ -2,8 +2,9 @@ package pl.stepniewski.kata.loadBalancerKataMto;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static pl.stepniewski.kata.loadBalancerKataMto.CurrentLoadPercentageMatcher.hasLoadPercentageOf;
+import static pl.stepniewski.kata.loadBalancerKataMto.ServerBuilder.server;
 
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
 public class ServerLoadBalancerTest {
@@ -21,13 +22,9 @@ public class ServerLoadBalancerTest {
 		assertThat(theServer, hasLoadPercentageOf(0.0d));
 	}
 
-	private Matcher<? super Server> hasLoadPercentageOf(double expectedLoadPercentage) {
-		return new CurrentLoadPercentageMatcher(expectedLoadPercentage);
-	}
-
 	private void balance(Server[] servers, Vm[] vms) {
 		new ServerLoadBalancer().balance(servers, vms);
-		
+
 	}
 
 	private Vm[] anEmptyListOfVms() {
@@ -40,9 +37,5 @@ public class ServerLoadBalancerTest {
 
 	private Server a(ServerBuilder builder) {
 		return builder.build();
-	}
-
-	private ServerBuilder server() {
-		return new ServerBuilder();
 	}
 }

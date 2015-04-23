@@ -1,10 +1,12 @@
 package pl.stepniewski.kata.loadBalancerKataMto;
 
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 public class CurrentLoadPercentageMatcher extends TypeSafeMatcher<Server> {
 
+	private static final double EPSILON = 0.01d;
 	private double expectedLoadPercentage;
 
 	public CurrentLoadPercentageMatcher(double expectedLoadPercentage) {
@@ -25,7 +27,16 @@ public class CurrentLoadPercentageMatcher extends TypeSafeMatcher<Server> {
 
 	@Override
 	protected boolean matchesSafely(Server server) {
-		return Math.abs(server.currentLoadPecentage - expectedLoadPercentage) < 0.01d;
+		return equalsDouble(server.currentLoadPecentage, expectedLoadPercentage);
+	}
+
+	private boolean equalsDouble(double d1, double d2) {
+		return Math.abs(d1 - d2) < EPSILON;
+	}
+
+	public static CurrentLoadPercentageMatcher hasLoadPercentageOf(
+			double expectedLoadPercentage) {
+		return new CurrentLoadPercentageMatcher(expectedLoadPercentage);
 	}
 
 }
