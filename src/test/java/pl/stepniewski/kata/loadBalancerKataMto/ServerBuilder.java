@@ -1,6 +1,6 @@
 package pl.stepniewski.kata.loadBalancerKataMto;
 
-public class ServerBuilder {
+public class ServerBuilder implements Builder<Server>{
 
 	private int capacity;
 
