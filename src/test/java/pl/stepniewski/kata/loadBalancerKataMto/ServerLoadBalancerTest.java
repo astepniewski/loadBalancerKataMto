@@ -3,10 +3,10 @@ package pl.stepniewski.kata.loadBalancerKataMto;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static pl.stepniewski.kata.loadBalancerKataMto.CurrentLoadPercentageMatcher.hasLoadPercentageOf;
+import static pl.stepniewski.kata.loadBalancerKataMto.ServerVmsCountMatcher.hasVmsCountOf;
 import static pl.stepniewski.kata.loadBalancerKataMto.ServerBuilder.server;
 import static pl.stepniewski.kata.loadBalancerKataMto.VmBuilder.vm;
 
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
 public class ServerLoadBalancerTest {
@@ -78,10 +78,6 @@ public class ServerLoadBalancerTest {
 
 	private <T> T a(Builder<T> builder) {
 		return builder.build();
-	}
-
-	private Matcher<? super Server> hasVmsCountOf(int expectedCount) {
-		return new ServerVmsCountMatcher(expectedCount);
 	}
 
 }
