@@ -8,4 +8,8 @@ public class Server {
 
 	}
 
+	public boolean contains(Vm theVm) {
+		return true;
+	}
+
 }
