@@ -6,6 +6,7 @@ import static pl.stepniewski.kata.loadBalancerKataMto.CurrentLoadPercentageMatch
 import static pl.stepniewski.kata.loadBalancerKataMto.ServerBuilder.server;
 import static pl.stepniewski.kata.loadBalancerKataMto.VmBuilder.vm;
 
+import org.hamcrest.Matcher;
 import org.junit.Test;
 
 public class ServerLoadBalancerTest {
@@ -67,8 +68,8 @@ public class ServerLoadBalancerTest {
 		return new Vm[0];
 	}
 
-	private Vm[] aListOfVmsWith(Vm vm) {
-		return new Vm[] { vm };
+	private Vm[] aListOfVmsWith(Vm... vms) {
+		return vms;
 	}
 
 	private Server[] aListOfServersWith(Server server) {
@@ -77,6 +78,10 @@ public class ServerLoadBalancerTest {
 
 	private <T> T a(Builder<T> builder) {
 		return builder.build();
+	}
+
+	private Matcher<? super Server> hasVmsCountOf(int expectedCount) {
+		return new ServerVmsCountMatcher(expectedCount);
 	}
 
 }
