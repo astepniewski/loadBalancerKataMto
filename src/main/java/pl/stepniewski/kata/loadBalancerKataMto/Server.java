@@ -6,12 +6,16 @@ import java.util.List;
 public class Server {
 
 	public static final double MAXIMUM_LOAD = 100d;
-	public double currentLoadPecentage;
+	private double currentLoadPecentage;
 	private int capacity;
 	private List<Vm> vms = new LinkedList<>();
 
 	public Server(int capacity) {
 		this.capacity = capacity;
+	}
+
+	public double getCurrentLoadPecentage() {
+		return currentLoadPecentage;
 	}
 
 	public boolean contains(Vm vm) {
